@@ -54,10 +54,16 @@ apis:
     5 (49 products at time of review). Built to the DSB Consumer Data Standards; no
     API key or authorization is required for product reference data.
 common:
+- type: DomainSecurity
+  url: security/beyond-bank-domain-security.yml
 - type: Website
   url: https://www.beyondbank.com.au/
 - type: Documentation
   url: https://www.beyondbank.com.au/open-banking/
+- type: APIReference
+  url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+- type: GettingStarted
+  url: https://www.beyondbank.com.au/open-banking/product-api.html
 - type: Blog
   url: https://www.beyondbank.com.au/blog/
 - type: LinkedIn
@@ -68,6 +74,26 @@ common:
   url: https://www.beyondbank.com.au/terms-of-use/
 - type: Support
   url: https://www.beyondbank.com.au/help-and-contact/
+- type: Overlay
+  url: overlays/beyond-bank-cds-banking-products-overlay.yaml
+- type: MCPServer
+  url: mcp/beyond-bank-mcp.yml
+- type: LLMsTxt
+  url: llms/beyond-bank-llms.txt
+- type: AgentSkill
+  url: skills/beyond-bank-lookup-banking-products.md
+- type: Conventions
+  url: conventions/beyond-bank-conventions.yml
+- type: Conformance
+  url: conformance/beyond-bank-conformance.yml
+- type: ErrorCatalog
+  url: errors/beyond-bank-problem-types.yml
+- type: DataModel
+  url: data-model/beyond-bank-data-model.yml
+- type: Lifecycle
+  url: lifecycle/beyond-bank-lifecycle.yml
+- type: Deprecation
+  url: https://consumerdatastandardsaustralia.github.io/standards/#version-control
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

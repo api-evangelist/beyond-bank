@@ -1,0 +1,73 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#introduction
+notes: >-
+  Cross-cutting request/response semantics for Beyond Bank's public CDR Product
+  Reference Data API. These conventions are defined by the DSB Consumer Data
+  Standards (CDS) that the endpoints conform to, and were derived from the harvested
+  OpenAPI plus the published CDS conventions. The public PRD surface is read-only
+  (GET) and unauthenticated; write-side conventions (idempotency for POST/PATCH) do
+  NOT apply to it.
+authentication:
+  public_prd: none (public, unauthenticated Product Reference Data)
+  consumer_data: OAuth2 / OpenID Connect FAPI 1.0 (CDR profile) — accredited Data Recipient, consumer consent, PAR, mTLS
+  reference: authentication (not derivable — spec declares no securitySchemes for the public PRD surface)
+versioning:
+  style: header
+  request_headers:
+    - name: x-v
+      required: true
+      description: Major version of the endpoint the client requests. PRD /banking/products currently serves x-v 5; /banking/products/{productId} serves x-v 7.
+    - name: x-min-v
+      required: false
+      description: Optional minimum acceptable major version; the holder serves the highest supported version between x-min-v and x-v.
+  response_headers:
+    - name: x-v
+      description: Major version actually served in the response.
+  unsupported: HTTP 406 (UnsupportedVersion) when the requested x-v is not supported; the supported version is advertised on the x-v response header.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#version-control
+pagination:
+  style: page-number
+  request_params:
+    - name: page
+      description: Page of results to request (1-based).
+    - name: page-size
+      description: Page size to request. Default is 25.
+  response_fields:
+    - links.first
+    - links.prev
+    - links.self
+    - links.next
+    - links.last
+    - meta.totalRecords
+    - meta.totalPages
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#pagination
+idempotency:
+  supported: false
+  note: >-
+    The public PRD surface is read-only (safe, idempotent GET operations by HTTP
+    semantics). The CDS defines an x-idempotency-key contract only for consumer-data
+    write operations (e.g. payment initiation), which are not part of Beyond Bank's
+    public surface — so no Idempotency pointer is asserted for this provider.
+request_tracing:
+  headers:
+    - name: x-fapi-interaction-id
+      description: >-
+        Optional client-supplied RFC 4122 UUID echoed by the holder for request
+        correlation; if absent the holder generates one and returns it. Part of the
+        CDS/FAPI header set (primarily used on authenticated endpoints).
+error_envelope:
+  format: cds-errorv2
+  shape: '{ "errors": [ { "code": "<urn>", "title": "...", "detail": "...", "meta": {...} } ] }'
+  note: >-
+    CDS uses its own ErrorV2 envelope (a top-level errors[] array), NOT RFC 9457
+    application/problem+json. See errors/beyond-bank-problem-types.yml.
+  reference: errors/beyond-bank-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  note: The CDS defines traffic-thresholds/rate-limits for the ecosystem but the public PRD surface documents no per-response rate-limit headers.
+cross_references:
+  errors: errors/beyond-bank-problem-types.yml
+  lifecycle: lifecycle/beyond-bank-lifecycle.yml
+  conformance: conformance/beyond-bank-conformance.yml

@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Beyond Bank Australia CDR Product Reference Data
+  version: 1.0.0
+# Provenance frontmatter (non-standard keys carried for the enrichment pipeline)
+x-generated: '2026-07-20'
+x-method: generated
+x-source: openapi/beyond-bank-cds-banking-products-openapi.yml
+extends: openapi/beyond-bank-cds-banking-products-openapi.yml
+actions:
+  # Record the REAL Beyond Bank production PRD host. The harvested DSB standard
+  # ships placeholder example servers (tls.dh.example.com / mtls.dh.example.com);
+  # Beyond Bank serves the public, unauthenticated Product Reference Data at the URL below.
+  - target: $.servers
+    update:
+      - description: Beyond Bank Australia — public CDR Product Reference Data (unauthenticated)
+        url: https://public.cdr.api.beyondbank.com.au/cds-au/v1
+  - target: $.info
+    update:
+      x-apievangelist-provider: Beyond Bank Australia
+      x-apievangelist-public-surface:
+        - listBankingProducts
+        - getBankingProductDetail
+      x-apievangelist-auth-note: >-
+        Only the two Product Reference Data operations are public and unauthenticated.
+        All other operations in this shared DSB Consumer Data Standards contract require
+        CDR consumer consent and an accredited Data Recipient operating under the CDR
+        OAuth2/OpenID Connect FAPI 1.0 security profile (PAR + mTLS); they are NOT public.
+      x-apievangelist-version-observed: 'x-v: 5'
+      x-apievangelist-spec-provenance: >-
+        Shared DSB Consumer Data Standards CDR Banking API (OpenAPI 3.0.3, v1.36.0),
+        not a Beyond-Bank proprietary specification.

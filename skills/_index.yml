@@ -1,0 +1,7 @@
+generated: '2026-07-20'
+method: generated
+skills:
+  - file: beyond-bank-lookup-banking-products.md
+    name: Look up Beyond Bank banking products (CDR PRD)
+    api: openapi/beyond-bank-cds-banking-products-openapi.yml
+    operations: [listBankingProducts, getBankingProductDetail]

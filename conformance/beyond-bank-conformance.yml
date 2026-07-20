@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/
+notes: >-
+  Standards conformance for Beyond Bank Australia's CDR API surface. Derived from the
+  harvested DSB Consumer Data Standards contract and Beyond Bank's public CDR
+  participation. NOTE: the OAuth2/OIDC/FAPI conformance items apply to the
+  authenticated CONSUMER-DATA surface (accredited Data Recipient flows), NOT to the
+  public, unauthenticated Product Reference Data endpoints, which require no auth.
+standards:
+  - id: cds-au-consumer-data-standards
+    conforms: true
+    evidence: Endpoints served under /cds-au/v1 conform to the DSB Consumer Data Standards (CDR Banking API v1.36.0); PRD confirmed live returning CDS-shaped bodies with x-v 5.
+  - id: cdr-open-banking
+    conforms: true
+    evidence: Beyond Bank is an Authorised Deposit-taking Institution (ADI) and CDR Data Holder + accredited Data Recipient participating in Australia's Consumer Data Right.
+  - id: oauth2
+    conforms: true
+    scope: consumer-data-only
+    evidence: CDR consumer data sharing uses OAuth2 authorization; NOT applicable to the public PRD surface (no securitySchemes declared for the two public GET operations).
+  - id: oidc
+    conforms: true
+    scope: consumer-data-only
+    evidence: CDR authorization uses OpenID Connect (hybrid flow, PAR); consumer-data surface only.
+  - id: fapi-1.0
+    conforms: true
+    scope: consumer-data-only
+    evidence: CDR security profile is FAPI 1.0 Advanced (PAR, mTLS, private_key_jwt); consumer-data surface only.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use the CDS ErrorV2 envelope (top-level errors[] with code/title/detail/meta URNs), not application/problem+json.
+  - id: pagination-page-number
+    conforms: true
+    evidence: page / page-size query params with links + meta.totalRecords/totalPages response fields per CDS pagination.
+  - id: header-versioning
+    conforms: true
+    evidence: x-v / x-min-v request headers; x-v response header; 406 UnsupportedVersion on mismatch (RFC-style version negotiation per CDS).

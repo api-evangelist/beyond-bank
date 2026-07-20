@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+notes: >-
+  No official/hosted MCP server is published by Beyond Bank Australia. This is a
+  DERIVED candidate tool list covering only the public, unauthenticated CDR Product
+  Reference Data surface (the two GET operations Beyond Bank actually serves openly).
+  The wider CDR consumer-data operations in the shared DSB contract are omitted because
+  they require accredited Data Recipient status + CDR OAuth2/OIDC FAPI consent and are
+  not agent-accessible without that authorization context.
+server:
+  name: beyond-bank-cdr-products
+  transport: http
+tools:
+  - name: list_banking_products
+    description: >-
+      List Beyond Bank's publicly offered banking products (paginated). Supports
+      filtering by effective status, product category, brand, and updated-since date.
+      Requires the x-v request header (currently major version 5).
+    source_operation: openapi/beyond-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - name: get_banking_product_detail
+    description: >-
+      Get full detail for a single Beyond Bank product by productId — rates, fees,
+      features, eligibility, constraints, bundles, and instalment terms. Requires the
+      x-v request header (currently major version 7).
+    source_operation: openapi/beyond-bank-cds-banking-products-openapi.yml#getBankingProductDetail

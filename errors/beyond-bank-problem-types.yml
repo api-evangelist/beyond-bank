@@ -1,0 +1,61 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cds-errorv2
+notes: >-
+  Error catalog for Beyond Bank's public CDR Product Reference Data endpoints,
+  derived from the response codes and documented error labels in the harvested DSB
+  Consumer Data Standards contract. CDS does NOT use RFC 9457 application/problem+json;
+  it uses the ErrorV2 envelope — a top-level "errors": [] array whose members carry a
+  URN "code", a stable "title", an occurrence-specific "detail", and a "meta" object.
+  The canonical urn:au-cds:error:v2:* codes below are the published DSB standard codes
+  the endpoints emit.
+envelope:
+  schema: ResponseErrorListV2
+  member_schema: ErrorV2
+  shape: '{ "errors": [ { "code": "<urn>", "title": "<stable summary>", "detail": "<occurrence detail>", "meta": { } } ] }'
+problems:
+  - status: 400
+    code: urn:au-cds:error:v2:Field/Invalid
+    title: Invalid Field
+    source_operations: [listBankingProducts, getBankingProductDetail]
+  - status: 400
+    code: urn:au-cds:error:v2:Field/Missing
+    title: Missing Required Field
+    source_operations: [listBankingProducts, getBankingProductDetail]
+  - status: 400
+    code: urn:au-cds:error:v2:Header/Missing
+    title: Missing Required Header
+    source_operations: [listBankingProducts, getBankingProductDetail]
+  - status: 400
+    code: urn:au-cds:error:v2:Header/InvalidVersion
+    title: Invalid Version
+    source_operations: [listBankingProducts, getBankingProductDetail]
+  - status: 400
+    code: urn:au-cds:error:v2:Field/InvalidDateTime
+    title: Invalid Date
+    source_operations: [listBankingProducts]
+  - status: 400
+    code: urn:au-cds:error:v2:Field/InvalidPage
+    title: Invalid Page
+    source_operations: [listBankingProducts]
+  - status: 400
+    code: urn:au-cds:error:v2:Field/InvalidPageSize
+    title: Invalid Page Size
+    source_operations: [listBankingProducts]
+  - status: 404
+    code: urn:au-cds:error:v2:Resource/Invalid
+    title: Invalid Banking Product
+    remediation: The supplied productId does not resolve to a known Beyond Bank product; obtain valid productId values from listBankingProducts.
+    source_operations: [getBankingProductDetail]
+  - status: 406
+    code: urn:au-cds:error:v2:Header/UnsupportedVersion
+    title: Unsupported Version
+    remediation: Request a supported x-v major version (advertised on the x-v response header — PRD list currently 5, detail currently 7).
+    source_operations: [listBankingProducts, getBankingProductDetail]
+  - status: 422
+    code: urn:au-cds:error:v2:Field/Invalid
+    title: Unprocessable field/parameter
+    note: The list endpoint declares a 422 response for parameter values that are syntactically valid but cannot be processed; the specific ErrorV2 code follows the CDS Field/* namespace.
+    source_operations: [listBankingProducts]

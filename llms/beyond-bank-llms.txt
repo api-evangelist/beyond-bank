@@ -1,0 +1,37 @@
+# Beyond Bank Australia
+
+> Beyond Bank Australia (ABN 15 087 651 143, AFSL/Australian Credit Licence 237856) is
+> one of the country's largest customer-owned (mutual) banks and the first Australian
+> bank certified as a B Corp. As an Authorised Deposit-taking Institution it participates
+> in Australia's Consumer Data Right (CDR / Open Banking). Its only PUBLIC API surface is
+> the unauthenticated Consumer Data Standards Product Reference Data (PRD) API — a list of
+> banking products and their full detail. Consumer data sharing (accounts, balances,
+> transactions) is NOT public: it requires an accredited Data Recipient under the CDR
+> OAuth2/OIDC FAPI profile.
+
+## APIs
+
+- [Beyond Bank CDR Product Reference Data API](https://www.beyondbank.com.au/open-banking/product-api.html): Public, unauthenticated product catalogue. GET /banking/products and GET /banking/products/{productId}. Requires the x-v header (list=5, detail=7). Base: https://public.cdr.api.beyondbank.com.au/cds-au/v1
+
+## Specs
+
+- [OpenAPI (CDS CDR Banking, shared standard)](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/openapi/beyond-bank-cds-banking-products-openapi.yml): DSB Consumer Data Standards CDR Banking API v1.36.0. The two product paths are the public subset Beyond Bank serves.
+- [OpenAPI Overlay (AE enhancements)](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/overlays/beyond-bank-cds-banking-products-overlay.yaml): Records the real production host and public-surface notes.
+
+## Artifacts
+
+- [MCP server (candidate)](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/mcp/beyond-bank-mcp.yml): Two derived tools over the public PRD surface.
+- [Agent Skill](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/skills/beyond-bank-lookup-banking-products.md): How an agent lists and reads Beyond Bank products.
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/conventions/beyond-bank-conventions.yml): x-v header versioning, page/page-size pagination, CDS ErrorV2 envelope.
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/errors/beyond-bank-problem-types.yml): CDS urn:au-cds:error:v2:* codes.
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/lifecycle/beyond-bank-lifecycle.yml): Header-major-version scheme; CDS version obsolescence.
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/conformance/beyond-bank-conformance.yml): CDS, CDR, OAuth2/OIDC/FAPI (consumer-data only).
+- [Data model](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/data-model/beyond-bank-data-model.yml): BankingProduct + BankingProductDetail entity graph.
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/security/beyond-bank-domain-security.yml): TLS/HSTS/SPF/DMARC probe.
+
+## Docs
+
+- [Open Banking landing](https://www.beyondbank.com.au/open-banking/)
+- [Product API page](https://www.beyondbank.com.au/open-banking/product-api.html)
+- [DSB Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards/)
+- [Support / enquiry](https://www.beyondbank.com.au/help-and-contact/)

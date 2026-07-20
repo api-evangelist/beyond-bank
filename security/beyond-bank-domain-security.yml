@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.beyondbank.com.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 26 18:13:56 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: public.cdr.api.beyondbank.com.au
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 29 01:29:19 2026 GMT
+  hsts: null
+domains:
+- domain: beyondbank.com.au
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

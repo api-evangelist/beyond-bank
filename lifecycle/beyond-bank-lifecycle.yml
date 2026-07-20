@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: https://www.beyondbank.com.au/open-banking/product-api.html
+notes: >-
+  Lifecycle posture for Beyond Bank's public CDR Product Reference Data API. Versioning
+  and deprecation are governed by the DSB Consumer Data Standards (CDS) that the
+  endpoints conform to. Beyond Bank does not publish a proprietary developer status
+  page, changelog, roadmap, or SLA for this surface (developer.beyondbank.com.au does
+  not resolve; no GitHub org). Absence recorded as valid data.
+versioning:
+  scheme: header-major-version
+  mechanism: x-v request header; x-v response header; x-min-v for minimum acceptable version
+  current:
+    listBankingProducts: 'x-v: 5'
+    getBankingProductDetail: 'x-v: 7'
+  observed: 'x-v: 5 (confirmed live 2026-07-20)'
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#version-control
+deprecation:
+  policy: CDS endpoint-version obsolescence — prior endpoint major versions are supported for a defined transition window and then retired per the Data Standards Body versioning/obsolescence process.
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#version-control
+  sunset_header: false
+  note: >-
+    Deprecation is governed by the shared standard, not by a Beyond-Bank-specific
+    deprecation notice. A requested x-v that is no longer supported returns HTTP 406
+    UnsupportedVersion.
+sla:
+  url: null
+  note: No Beyond-Bank-specific developer SLA published for the public PRD surface. CDR non-functional requirements (availability/performance) are set by the CDR rules and reported via the ACCC CDR performance dashboard, not a Beyond Bank status page.
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,64 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+notes: >-
+  Entity-relationship graph for Beyond Bank's public CDR Product Reference Data
+  surface, derived from OpenAPI $ref links in the harvested DSB Consumer Data Standards
+  contract (schemas ResponseBankingProductListV4 / BankingProductDetailV7).
+entities:
+  - name: BankingProduct
+    schema: BankingProductV4
+    id_field: productId
+    description: A publicly offered Beyond Bank banking product summary as returned in the paginated product list.
+    key_fields: [productId, effectiveFrom, effectiveTo, lastUpdated, productCategory, name, description, brand, isTailored]
+  - name: BankingProductDetail
+    schema: BankingProductDetailV7
+    id_field: productId
+    description: Full detail for a single product, retrieved by productId.
+relationships:
+  - from: BankingProductList
+    to: BankingProduct
+    type: has_many
+    via: data.products[]
+  - from: BankingProductDetail
+    to: BankingProduct
+    type: belongs_to
+    via: productId
+  - from: BankingProductDetail
+    to: BankingProductBundle
+    type: has_many
+    via: bundles
+  - from: BankingProductDetail
+    to: BankingProductFeature
+    type: has_many
+    via: features
+    schema: BankingProductFeatureV4
+  - from: BankingProductDetail
+    to: BankingProductConstraint
+    type: has_many
+    via: constraints
+    schema: BankingProductConstraintV3
+  - from: BankingProductDetail
+    to: BankingProductEligibility
+    type: has_many
+    via: eligibility
+    schema: BankingProductEligibilityV2
+  - from: BankingProductDetail
+    to: BankingProductFee
+    type: has_many
+    via: fees
+    schema: BankingProductFeeV2
+  - from: BankingProductDetail
+    to: BankingProductDepositRate
+    type: has_many
+    via: depositRates
+    schema: BankingProductDepositRateV2
+  - from: BankingProductDetail
+    to: BankingProductLendingRate
+    type: has_many
+    via: lendingRates
+    schema: BankingProductLendingRateV3
+  - from: BankingProductDetail
+    to: BankingProductInstalments
+    type: has_one
+    via: instalments
