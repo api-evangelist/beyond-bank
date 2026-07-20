@@ -1,0 +1,73 @@
+aid: beyond-bank
+url: https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/apis.yml
+name: Beyond Bank Australia
+kind: company
+description: Beyond Bank Australia Limited (ABN 15 087 651 143, AFSL/Australian Credit
+  Licence 237856) is one of the country's largest customer-owned (mutual) banks, owned
+  by its members rather than shareholders, and the first bank in Australia to become
+  a certified B Corp. It serves roughly 280,000 members from around 56 branches across
+  South Australia, Victoria, the ACT, Western Australia, and New South Wales, with
+  more than nine billion dollars in funds under management, offering everyday accounts,
+  savings, term deposits, loans, insurance, and financial planning. As an Authorised
+  Deposit-taking Institution (ADI) it participates in Australia's Consumer Data Right
+  (CDR / Open Banking), exposing a public, unauthenticated Product Reference Data (PRD)
+  API built to the Data Standards Body (DSB) Consumer Data Standards; consumer data
+  sharing beyond product reference data requires accredited data recipient status and
+  the CDR OAuth2/OIDC FAPI authorization model.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Banking
+- Australia
+- Customer Owned
+- Product Reference Data
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: beyond-bank:beyond-bank-cdr-product-reference-data-api
+  name: Beyond Bank Australia CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking
+  - Australia
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.beyondbank.com.au/open-banking/product-api.html
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+  properties:
+  - url: https://www.beyondbank.com.au/open-banking/product-api.html
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+    type: APIReference
+  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
+    Data API exposing Beyond Bank's banking product catalogue. GET /banking/products
+    returns a paginated list of products and GET /banking/products/{productId} returns
+    full product detail (rates, fees, features, eligibility, constraints). Confirmed
+    live returning HTTP 200 with a data.products array and an x-v response header of
+    5 (49 products at time of review). Built to the DSB Consumer Data Standards; no
+    API key or authorization is required for product reference data.
+common:
+- type: Website
+  url: https://www.beyondbank.com.au/
+- type: Documentation
+  url: https://www.beyondbank.com.au/open-banking/
+- type: Blog
+  url: https://www.beyondbank.com.au/blog/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/beyond-bank-australia
+- type: PrivacyPolicy
+  url: https://www.beyondbank.com.au/privacy/
+- type: TermsOfService
+  url: https://www.beyondbank.com.au/terms-of-use/
+- type: Support
+  url: https://www.beyondbank.com.au/help-and-contact/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

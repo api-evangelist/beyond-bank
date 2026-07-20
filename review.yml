@@ -1,0 +1,77 @@
+aid: beyond-bank
+name: Beyond Bank Australia
+review:
+  question: Does Beyond Bank Australia expose a confirmed, live public API surface,
+    and what is its posture under the Consumer Data Right (CDR)?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  developerPortal: false
+findings:
+  summary: |
+    Beyond Bank Australia (ABN 15 087 651 143), a customer-owned/mutual ADI and
+    Australia's first certified B Corp bank, exposes exactly the public API surface
+    the Consumer Data Right (CDR / Open Banking) requires of an active ADI: a public,
+    unauthenticated Product Reference Data (PRD) API. The PRD base was CONFIRMED LIVE
+    on 2026-07-20 at
+    https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+    returning HTTP 200 with a CDS-shaped body (data.products array, meta.totalRecords
+    49) when called with the required header x-v: 5. Calls with an unsupported x-v
+    (e.g. x-v: 3) correctly return HTTP 406 UnsupportedVersion and advertise the
+    supported version in the x-v response header, so PRD currently serves x-v major 5.
+    Beyond Bank does NOT run a broad self-serve developer portal: developer.beyondbank.com.au
+    does not resolve, there is no GitHub organization (github.com/beyondbank -> 404),
+    and no Up-style personal-banking developer API is published. All API documentation
+    is the CDR/Open Banking marketing page plus references to the DSB Consumer Data
+    Standards. Beyond product reference data, CDR consumer data sharing (accounts,
+    balances, transactions, payees, direct debits) is NOT public: it requires the
+    consumer to be authenticated and the caller to be an accredited Data Recipient
+    (ADR) operating under the CDR OAuth2 / OpenID Connect FAPI security profile with
+    consent, PAR, and mTLS - not an open/public surface.
+  specProvenance: |
+    The OpenAPI harvested to openapi/beyond-bank-cds-banking-products-openapi.yml is
+    the SHARED Data Standards Body (DSB) Consumer Data Standards "CDR Banking API"
+    contract (OpenAPI 3.0.3, info.version 1.36.0), fetched verbatim from the DSB
+    ConsumerDataStandardsAustralia/standards repository. It is NOT a Beyond-Bank
+    proprietary specification. It is the authoritative contract Beyond Bank's PRD
+    endpoints conform to; it also documents the wider (authenticated, non-public)
+    banking endpoints for completeness. The two product paths (/banking/products and
+    /banking/products/{productId}) are the public, unauthenticated subset Beyond Bank
+    serves.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+      documented: true
+      note: Public unauthenticated CDR Product Reference Data. Confirmed HTTP 200 with x-v 5.
+    - protocol: REST
+      scheme: https
+      baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking
+      documented: true
+      note: Wider CDR banking consumer-data endpoints exist per the standard but are NOT public - they require CDR consent + accredited ADR + OAuth2/OIDC FAPI (PAR, mTLS).
+  authModel:
+    productReferenceData: none (public, unauthenticated)
+    consumerData: OAuth2 / OpenID Connect FAPI 1.0 (CDR profile) - accredited Data Recipient, consumer consent, PAR, mTLS
+  versionObserved: 'x-v: 5'
+  productCountObserved: 49
+sources:
+  - url: https://www.beyondbank.com.au/open-banking/
+    type: Documentation
+    note: Open Banking landing page; describes CDR participation and links to the Product API.
+  - url: https://www.beyondbank.com.au/open-banking/product-api.html
+    type: Documentation
+    note: Documents the two Product API base URIs and references the DSB Consumer Data Standards.
+  - url: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+    type: APIReference
+    note: Live PRD endpoint. HTTP 200 with x-v 5 (data.products, meta.totalRecords 49); HTTP 406 on unsupported x-v.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: Documentation
+    note: DSB Consumer Data Standards - the shared CDS contract the PRD API conforms to.
+  - url: https://raw.githubusercontent.com/ConsumerDataStandardsAustralia/standards/master/slate/source/includes/swagger/cds_banking.yaml
+    type: OpenAPI
+    note: Provenance of the harvested spec (DSB CDR Banking API, OpenAPI 3.0.3, v1.36.0). Shared standard, not bank-proprietary.
+actions:
+  openapiPath: openapi/beyond-bank-cds-banking-products-openapi.yml
+  openapiProvenance: DSB Consumer Data Standards (shared) - not Beyond-Bank proprietary
+  apisYmlUpdated: true
