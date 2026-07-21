@@ -159,10 +159,18 @@ apis:
     authenticated (mTLS) FAPI OAuth2/OIDC channel rather than the unauthenticated
     Product Reference Data host.
 common:
+- type: AgenticAccess
+  url: agentic-access/beyond-bank-agentic-access.yml
+- type: Authentication
+  url: authentication/beyond-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/beyond-bank-scopes.yml
 - type: DomainSecurity
   url: security/beyond-bank-domain-security.yml
 - type: Website
   url: https://www.beyondbank.com.au/
+- type: DeveloperPortal
+  url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
 - type: Documentation
   url: https://www.beyondbank.com.au/open-banking/
 - type: APIReference

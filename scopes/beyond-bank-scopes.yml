@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/beyond-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+notes: >-
+  OAuth2 authorisation scopes for Beyond Bank's CDR Banking surface. The harvested DSB
+  Consumer Data Standards contract does not declare formal OpenAPI securitySchemes; it
+  carries the scope requirement per operation on the CDR-specific `x-scopes` extension.
+  These five banking scopes were derived by aggregating every `x-scopes` value across the
+  spec's operations, and their descriptions follow the published DSB Consumer Data
+  Standards authorisation-scope definitions. Scopes apply ONLY to the consumer-authorised
+  (accredited Data Recipient) surface — the public Product Reference Data operations
+  (listBankingProducts / getBankingProductDetail) declare no `x-scopes` and require no
+  authorisation. Scopes are requested via the CDR OAuth2/OIDC FAPI authorization request
+  (with the mandatory `openid` and `profile` OIDC scopes and the CDR `cdr:registration`
+  where applicable); the token, authorization, and PAR endpoints live on Beyond Bank's CDR
+  identity server (advertised via the CDR Register and the holder's OIDC discovery document),
+  not on the public PRD host, so their URLs are not asserted here.
+schemes:
+  - name: cdr-oauth2-fapi
+    type: oauth2
+    profile: FAPI 1.0 Advanced (CDR security profile)
+    flows:
+      - flow: authorizationCode
+        note: >-
+          OIDC hybrid/authorization-code with PAR (Pushed Authorization Requests),
+          request object signing, and mTLS-bound tokens per the CDR FAPI profile.
+    source: openapi/beyond-bank-cds-banking-products-openapi.yml (x-scopes)
+scopes:
+  - scope: bank:accounts.basic:read
+    description: >-
+      Read account identifiers and balances — the account list and balance endpoints.
+      Grants basic account data without masked account numbers or product detail.
+    operations: [listBankingAccounts, listBankingBalancesBulk, listBankingBalancesSpecificAccounts, getBankingBalance]
+  - scope: bank:accounts.detail:read
+    description: >-
+      Read detailed account information including masked account numbers, account terms,
+      features, addresses, and product-category detail.
+    operations: [getBankingAccountDetail]
+  - scope: bank:transactions:read
+    description: Read account transactions and transaction detail (with date/amount/text filters).
+    operations: [listBankingTransactions, getBankingTransactionDetail]
+  - scope: bank:regular_payments:read
+    description: >-
+      Read direct debits, scheduled payments, and instalment plans authorised against the
+      consumer's accounts.
+    operations: [listDirectDebits, listDirectDebitsBulk, listDirectDebitsSpecificAccounts, listScheduledPayments, listScheduledPaymentsBulk, listScheduledPaymentsSpecificAccounts, listInstalmentPlans, listInstalmentPlansBulk]
+  - scope: bank:payees:read
+    description: Read the consumer's saved payees (domestic, international, and BPAY payee types).
+    operations: [listBankingPayees, getBankingPayeeDetail]

@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+notes: >-
+  Authentication profile for Beyond Bank Australia's CDR Banking surface. The harvested
+  DSB Consumer Data Standards contract declares no formal OpenAPI securitySchemes, so this
+  profile is documented from Beyond Bank's public open-banking pages and the published DSB
+  Consumer Data Standards security profile rather than mechanically derived. There are two
+  distinct tiers: an OPEN, unauthenticated Product Reference Data (PRD) surface, and a
+  consumer-authorised data-sharing surface secured by the CDR OAuth2/OIDC FAPI model.
+summary:
+  types: [none, oauth2, openIdConnect, mutualTLS]
+  tiers: [public-prd, consumer-data]
+  oauth2_flows: [authorizationCode]
+schemes:
+  - name: public-prd-none
+    tier: public-prd
+    type: none
+    description: >-
+      The Product Reference Data endpoints (listBankingProducts, getBankingProductDetail)
+      are public and unauthenticated — no API key, no OAuth token. Only the CDS versioning
+      header (x-v) is required. Confirmed live returning HTTP 200 with x-v 5.
+    operations: [listBankingProducts, getBankingProductDetail]
+    sources: [openapi/beyond-bank-cds-banking-products-openapi.yml]
+  - name: cdr-oauth2-fapi
+    tier: consumer-data
+    type: oauth2
+    scheme: authorizationCode
+    profile: FAPI 1.0 Advanced (CDR security profile)
+    features:
+      - Pushed Authorization Requests (PAR)
+      - request object signing (private_key_jwt client authentication)
+      - mTLS sender-constrained access tokens
+      - OIDC hybrid / authorization-code flow with consumer consent
+      - Accredited Data Recipient registration via the CDR Register
+    scopes_ref: scopes/beyond-bank-scopes.yml
+    description: >-
+      Consumer data sharing (accounts, balances, transactions, direct debits, scheduled
+      payments, payees) requires accredited Data Recipient status and explicit consumer
+      consent through the CDR authorization flow. Access is over the mutually authenticated
+      (mTLS) FAPI channel, not the public PRD host.
+    sources: [openapi/beyond-bank-cds-banking-products-openapi.yml]
+  - name: cdr-oidc
+    tier: consumer-data
+    type: openIdConnect
+    description: >-
+      Identity layer for the CDR authorization — OpenID Connect discovery, ID tokens, and
+      consent are provided by Beyond Bank's CDR identity server, advertised via the CDR
+      Register and the holder's OIDC discovery document.
+  - name: cdr-mtls
+    tier: consumer-data
+    type: mutualTLS
+    description: >-
+      Mutual TLS is mandatory on the CDR data-sharing channel; access tokens are bound to
+      the client's mTLS certificate (sender-constrained) per FAPI. The public PRD host does
+      not require client certificates.
