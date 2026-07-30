@@ -14,7 +14,19 @@ description: Beyond Bank Australia Limited (ABN 15 087 651 143, AFSL/Australian 
   API built to the Data Standards Body (DSB) Consumer Data Standards; consumer data
   sharing beyond product reference data requires accredited data recipient status and
   the CDR OAuth2/OIDC FAPI authorization model.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/beyond-bank.png
 tags:
 - Financial
 - Banks
@@ -28,136 +40,181 @@ created: '2026-07-20'
 modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
-- aid: beyond-bank:beyond-bank-cdr-product-reference-data-api
-  name: Beyond Bank Australia CDR Product Reference Data API
-  tags:
-  - CDR
-  - Open Banking
-  - Product Reference Data
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: beyond-bank:beyond-bank-banking-account-balances-api
+  name: Beyond Bank Australia Banking Account Balances API
+  description: Banking Account Balance endpoints
   humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
   baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
-  properties:
-  - url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
-    type: APIReference
-  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
-    Data API exposing Beyond Bank's banking product catalogue. GET /banking/products
-    returns a paginated list of products and GET /banking/products/{productId} returns
-    full product detail (rates, fees, features, eligibility, constraints). Confirmed
-    live returning HTTP 200 with a data.products array and an x-v response header of
-    5 at time of review. Built to the DSB Consumer Data Standards; no API key or
-    authorization is required for product reference data.
-- aid: beyond-bank:beyond-bank-cdr-accounts-balances-api
-  name: Beyond Bank Australia CDR Accounts & Balances API
   tags:
-  - CDR
-  - Open Banking
-  - Accounts
-  - Balances
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.beyondbank.com.au/open-banking/
-  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/accounts
+  - Banking Account Balances
   properties:
-  - url: https://www.beyondbank.com.au/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
-    type: APIReference
-  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right (CDR) Banking Accounts and
-    Balances API, part of the standardized DSB Consumer Data Standards surface every
-    Australian ADI implements. Covers GET /banking/accounts (list accounts), GET
-    /banking/accounts/balances (bulk balances), GET /banking/accounts/{accountId}/balance
-    (single account balance) and GET /banking/accounts/{accountId} (account detail).
-    These endpoints are NOT public; a member must authorize an Accredited Data Recipient
-    via the CDR consent flow, and calls are made over the mutually authenticated
-    (mTLS) FAPI OAuth2/OIDC channel, not the public PRD host.
-- aid: beyond-bank:beyond-bank-cdr-transactions-api
-  name: Beyond Bank Australia CDR Transactions API
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-account-balances-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-account-direct-debits-api
+  name: Beyond Bank Australia Banking Account Direct Debits API
+  description: Banking Account Direct Debit endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Transactions
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.beyondbank.com.au/open-banking/
-  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/accounts/{accountId}/transactions
+  - Banking Account Direct Debits
   properties:
-  - url: https://www.beyondbank.com.au/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
-    type: APIReference
-  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right (CDR) Banking Transactions
-    API from the standardized DSB Consumer Data Standards surface. Covers GET
-    /banking/accounts/{accountId}/transactions (transactions for an account, with
-    date/amount/text filters) and GET
-    /banking/accounts/{accountId}/transactions/{transactionId} (transaction detail).
-    Not public; requires member consent to an Accredited Data Recipient and is served
-    over the CDR mutually authenticated (mTLS) FAPI OAuth2/OIDC channel rather than
-    the unauthenticated Product Reference Data host.
-- aid: beyond-bank:beyond-bank-cdr-direct-debits-scheduled-payments-api
-  name: Beyond Bank Australia CDR Direct Debits & Scheduled Payments API
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-account-direct-debits-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-account-scheduled-payments-api
+  name: Beyond Bank Australia Banking Account Scheduled Payments API
+  description: Banking Account Scheduled Payment endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Direct Debits
-  - Scheduled Payments
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.beyondbank.com.au/open-banking/
-  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/accounts/direct-debits
+  - Banking Account Scheduled Payments
   properties:
-  - url: https://www.beyondbank.com.au/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
-    type: APIReference
-  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right (CDR) Banking Direct Debits
-    and Scheduled Payments API from the standardized DSB Consumer Data Standards
-    surface. Covers GET /banking/accounts/{accountId}/direct-debits, POST
-    /banking/accounts/direct-debits (bulk), GET
-    /banking/accounts/{accountId}/payments/scheduled and POST
-    /banking/payments/scheduled (bulk scheduled payments). Not public; requires
-    member consent to an Accredited Data Recipient and is served over the CDR
-    mutually authenticated (mTLS) FAPI OAuth2/OIDC channel, not the public PRD host.
-- aid: beyond-bank:beyond-bank-cdr-payees-api
-  name: Beyond Bank Australia CDR Payees API
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-account-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-account-transactions-api
+  name: Beyond Bank Australia Banking Account Transactions API
+  description: Banking Account Transaction endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
   tags:
-  - CDR
-  - Open Banking
-  - Payees
-  - Banking
-  - Australia
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.beyondbank.com.au/open-banking/
-  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/payees
+  - Banking Account Transactions
   properties:
-  - url: https://www.beyondbank.com.au/open-banking/
-    type: Documentation
-  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
-    type: APIReference
-  - url: openapi/beyond-bank-cds-banking-products-openapi.yml
-    type: OpenAPI
-  description: Consumer-authorized Consumer Data Right (CDR) Banking Payees API from
-    the standardized DSB Consumer Data Standards surface. Covers GET /banking/payees
-    (list a member's saved payees) and GET /banking/payees/{payeeId} (payee detail,
-    including domestic, international, and BPAY payee types). Not public; requires
-    member consent to an Accredited Data Recipient and is served over the CDR mutually
-    authenticated (mTLS) FAPI OAuth2/OIDC channel rather than the unauthenticated
-    Product Reference Data host.
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-account-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-accounts-api
+  name: Beyond Bank Australia Banking Accounts API
+  description: Banking Account endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-payees-api
+  name: Beyond Bank Australia Banking Payees API
+  description: Banking Payee endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Payees
+  properties:
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-payees-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+- aid: beyond-bank:beyond-bank-banking-products-api
+  name: Beyond Bank Australia Banking Products API
+  description: Banking Product endpoints
+  humanURL: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  baseURL: https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products
+  tags:
+  - Banking Products
+  properties:
+  - type: OpenAPI
+    url: openapi/beyond-bank-banking-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/beyond-bank-product-apis/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+  - type: Documentation
+    url: https://www.beyondbank.com.au/open-banking/
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+  - type: APIReference
+    url: >-
+      https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+  - type: APIReference
+    url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
 common:
 - type: AgenticAccess
   url: agentic-access/beyond-bank-agentic-access.yml
