@@ -1,0 +1,14 @@
+{
+  "repo": "beyond-bank",
+  "feeds": [
+    {
+      "source": "https://www.beyondbank.com.au/open-banking/product-api.html",
+      "feed_url": "https://www.beyondbank.com.au/open-banking/product-api.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-01T15:49:00Z"
+}
