@@ -14,6 +14,18 @@ description: Beyond Bank Australia Limited (ABN 15 087 651 143, AFSL/Australian 
   API built to the Data Standards Body (DSB) Consumer Data Standards; consumer data
   sharing beyond product reference data requires accredited data recipient status and
   the CDR OAuth2/OIDC FAPI authorization model.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
