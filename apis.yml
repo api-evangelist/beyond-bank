@@ -228,6 +228,9 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
 common:
+- type: CapabilityMap
+  url: capabilities/beyond-bank-capability-edges.yml
+  name: Beyond Bank Australia Business Capability Map
 - type: AgenticAccess
   url: agentic-access/beyond-bank-agentic-access.yml
 - type: Authentication
