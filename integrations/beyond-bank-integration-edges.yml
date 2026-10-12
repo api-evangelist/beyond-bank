@@ -1,0 +1,36 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/beyond-bank/integrations
+- https://zapier.com/apps/beyond-bank-australia/integrations
+- https://n8n.io/integrations/beyond-bank/
+- https://composio.dev/toolkits/beyond-bank
+- https://monid.ai/tools/beyond-bank
+checked:
+- https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+- https://composio.dev/toolkits/beyond-bank
+- https://monid.ai/tools/beyond-bank
+- https://n8n.io/integrations/beyond-bank/
+- https://zapier.com/apps/beyond-bank-australia/integrations
+- https://zapier.com/apps/beyond-bank/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: Consumer Data Right
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  contract_reference:
+    register: CDR Register (Australia, ACCC)
+    spec_file: null
+    role: data-holder
+    registered_name: Beyond Bank Australia
+    register_id: 5aee067e-1664-eb11-a81f-000d3a884a20
+    matched_domain: beyondbank.com.au
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
+templates: []
