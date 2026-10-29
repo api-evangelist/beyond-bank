@@ -1,4 +1,4 @@
-# Beyond Bank Australia (beyond-bank)
+# Beyond Bank Australia
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,60 +64,133 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Beyond Bank Australia Limited (ABN 15 087 651 143, AFSL/Australian Credit Licence 237856) is one of the country's largest customer-owned (mutual) banks, owned by its members rather than shareholders, and the first bank in Australia to become a certified B Corp. It serves roughly 280,000 members from around 56 branches across South Australia, Victoria, the ACT, Western Australia, and New South Wales, with more than nine billion dollars in funds under management. As an Authorised Deposit-taking Institution (ADI) it participates in Australia's Consumer Data Right (CDR / Open Banking), exposing a public, unauthenticated Product Reference Data (PRD) API built to the Data Standards Body (DSB) Consumer Data Standards.
+Beyond Bank Australia Limited (ABN 15 087 651 143, AFSL/Australian Credit Licence 237856) is one of the country's largest customer-owned (mutual) banks, owned by its members rather than shareholders, and the first bank in Australia to become a certified B Corp. It serves roughly 280,000 members from around 56 branches across South Australia, Victoria, the ACT, Western Australia, and New South Wales, with more than nine billion dollars in funds under management, offering everyday accounts, savings, term deposits, loans, insurance, and financial planning. As an Authorised Deposit-taking Institution (ADI) it participates in Australia's Consumer Data Right (CDR / Open Banking), exposing a public, unauthenticated Product Reference Data (PRD) API built to the Data Standards Body (DSB) Consumer Data Standards; consumer data sharing beyond product reference data requires accredited data recipient status and the CDR OAuth2/OIDC FAPI authorization model.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/beyond-bank/refs/heads/main/apis.yml)
+**Areas:** Finance · Banks · Open Banking · CDR · Consumer Banking · Australia · Customer Owned · Product Reference Data
 
-## Tags
+## Beyond Bank Australia on APIs.io
 
-- Financial
-- Banks
-- Open Banking
-- CDR
-- Consumer Banking
-- Australia
-- Customer Owned
-- Product Reference Data
+Everything profiled for Beyond Bank Australia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/beyond-bank/](https://apis.io/providers/beyond-bank/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-07-20
-- **Modified:** 2026-07-20
+- [Beyond Bank Australia Banking Account Balances API](https://apis.io/apis/beyond-bank/beyond-bank-banking-account-balances-api/) — Banking Account Balance endpoints
+- [Beyond Bank Australia Banking Account Direct Debits API](https://apis.io/apis/beyond-bank/beyond-bank-banking-account-direct-debits-api/) — Banking Account Direct Debit endpoints
+- [Beyond Bank Australia Banking Account Scheduled Payments API](https://apis.io/apis/beyond-bank/beyond-bank-banking-account-scheduled-payments-api/) — Banking Account Scheduled Payment endpoints
+- [Beyond Bank Australia Banking Account Transactions API](https://apis.io/apis/beyond-bank/beyond-bank-banking-account-transactions-api/) — Banking Account Transaction endpoints
+- [Beyond Bank Australia Banking Accounts API](https://apis.io/apis/beyond-bank/beyond-bank-banking-accounts-api/) — Banking Account endpoints
+- [Beyond Bank Australia Banking Payees API](https://apis.io/apis/beyond-bank/beyond-bank-banking-payees-api/) — Banking Payee endpoints
+- [Beyond Bank Australia Banking Products API](https://apis.io/apis/beyond-bank/beyond-bank-banking-products-api/) — Banking Product endpoints
 
-## APIs
+### Published properties
 
-### Beyond Bank Australia CDR Product Reference Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public, unauthenticated Consumer Data Right (CDR) Product Reference Data API exposing Beyond Bank's banking product catalogue. `GET /banking/products` returns a paginated list of products and `GET /banking/products/{productId}` returns full product detail (rates, fees, features, eligibility, constraints). Confirmed live returning HTTP 200 with a `data.products` array and an `x-v` response header of 5 (49 products at time of review). Built to the DSB Consumer Data Standards; no API key or authorization is required for product reference data.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.beyondbank.com.au/open-banking/product-api.html](https://www.beyondbank.com.au/open-banking/product-api.html)
-- **Base URL:** `https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [beyond-bank-cdr-products](https://apis.io/servers/beyond-bank/beyond-bank-cdr-products/)
 
-- CDR
-- Open Banking
-- Product Reference Data
-- Banking
-- Australia
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.beyondbank.com.au/open-banking/product-api.html)
-- [API Reference](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
-- [OpenAPI](openapi/beyond-bank-cds-banking-products-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Beyond Bank Agentic Access](https://apis.io/agentic-access/beyond-bank/beyond-bank-agentic-access/)
 
-## Common Properties
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [CDR Banking Banking Account Balances API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-account-balances-api/)
+- [CDR Banking Banking Account Balances Banking Account Direct Debits API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-account-direct-debits-api/)
+- [CDR Banking Banking Account Balances Banking Account Scheduled Payments API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-account-scheduled-payments-api/)
+- [CDR Banking Banking Account Balances Banking Account Transactions API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-account-transactions-api/)
+- [CDR Banking Banking Account Balances Banking Accounts API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-accounts-api/)
+- [CDR Banking Banking Account Balances Banking Payees API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-payees-api/)
+- [CDR Banking Banking Account Balances Banking Products API](https://apis.io/collections/beyond-bank/open-beyond-bank-banking-products-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Beyond Bank Cds Banking Products Overlay](https://apis.io/overlays/beyond-bank/beyond-bank-cds-banking-products-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Beyond Bank Authentication](https://apis.io/security/beyond-bank/beyond-bank-authentication/)
+- [Beyond Bank Domain Security](https://apis.io/security/beyond-bank/beyond-bank-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Beyond Bank Scopes](https://apis.io/scopes/beyond-bank/beyond-bank-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.beyondbank.com.au/)
 - [Documentation](https://www.beyondbank.com.au/open-banking/)
-- [Blog](https://www.beyondbank.com.au/blog/)
-- [LinkedIn](https://www.linkedin.com/company/beyond-bank-australia)
-- [Privacy Policy](https://www.beyondbank.com.au/privacy/)
-- [Terms of Service](https://www.beyondbank.com.au/terms-of-use/)
+- [Getting started](https://www.beyondbank.com.au/open-banking/product-api.html)
+- [API reference](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
 - [Support](https://www.beyondbank.com.au/help-and-contact/)
+- [Blog](https://www.beyondbank.com.au/blog/)
+- [Terms of service](https://www.beyondbank.com.au/terms-of-use/)
+- [Privacy policy](https://www.beyondbank.com.au/privacy/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 38.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 44.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 21.1 |
+
+**Agent readiness 23.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 37.8** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/beyond-bank/](https://apis.io/providers/beyond-bank/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Beyond Bank Australia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/beyond-bank/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
